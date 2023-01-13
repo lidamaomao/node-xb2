@@ -1,4 +1,5 @@
-const express = require("express");
+import express from "express"
+import { Request, Response } from "express"
 const app = express();
 const port = 3000;
 
@@ -11,7 +12,7 @@ app.listen(port, () => {
   console.log("服务已启动");
 });
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
@@ -33,21 +34,21 @@ const data = [
   },
 ];
 
-app.get("/posts", (req, res) => {
+app.get("/posts", (req: Request, res: Response) => {
   res.send(data);
 });
 
-app.get("/posts/:postId", (req, res) => {
+app.get("/posts/:postId", (req: Request, res: Response) => {
   // console.log(req.params);
   const { postId } = req.params;
-  const posts = data.filter((item) => item.id == postId);
+  const posts = data.filter((item) => item.id == parseInt(postId, 10));
   res.send(posts[0]);
 });
 
 /**
  * 创建内容
  */
-app.post("/posts", (req, res) => {
+app.post("/posts", (req: Request, res: Response) => {
   // 获取请求里的内容
   const { content } = req.body;
   console.log(req.headers["sing-title"]);
@@ -56,6 +57,6 @@ app.post("/posts", (req, res) => {
   res.set("sing-title", "How I wonder what you are");
   // 作出响应
   res.send({
-    message: `成功创建了内容：${content}`,
+    message: `成功创建内容：${content}`,
   });
 });
