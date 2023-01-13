@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+/**
+ * 使用 JSON 中间件
+ */
+app.use(express.json());
+
 app.listen(port, () => {
   console.log("服务已启动");
 });
@@ -37,4 +42,20 @@ app.get("/posts/:postId", (req, res) => {
   const { postId } = req.params;
   const posts = data.filter((item) => item.id == postId);
   res.send(posts[0]);
+});
+
+/**
+ * 创建内容
+ */
+app.post("/posts", (req, res) => {
+  // 获取请求里的内容
+  const { content } = req.body;
+  console.log(req.headers["sing-title"]);
+
+  res.status(201);
+  res.set("sing-title", "How I wonder what you are");
+  // 作出响应
+  res.send({
+    message: `成功创建了内容：${content}`,
+  });
 });
