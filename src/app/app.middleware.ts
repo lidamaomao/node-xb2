@@ -18,6 +18,10 @@ export const defaultErrorHandle = (
   res: Response,
   next: NextFunction,
 ) => {
+  if (err.message) {
+    console.log(err.message)
+  }
+
   let statusCode: number, message: string
 
   switch (err.message) {
