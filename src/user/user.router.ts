@@ -1,12 +1,12 @@
 import express from "express";
 import * as userController from "./user.controller";
-import { validateUserData, hashPassword } from './user.middleware';
+import { validateUserData, hashPassword } from "./user.middleware";
 
 const router = express.Router();
 
 /**
  * 创建用户
  */
-router.post("/users", validateUserData, hashPassword, userController.store)
+router.post("/users", validateUserData, hashPassword, userController.store);
 
 export default router;
